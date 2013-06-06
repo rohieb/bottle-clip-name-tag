@@ -37,7 +37,7 @@ e=100;    // should be big enough, used for the outer boundary of the text/logo
  *	in mm.
  * font: the path to a font for Write.scad.
  */
-module bottle_clip_name_tag(ru=13, rl=17.5, ht=26, width=2.5,
+module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5,
 		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
 	difference() {
 		rotate([0,0,-45]) union() {
@@ -71,14 +71,15 @@ module bottle_clip_name_tag(ru=13, rl=17.5, ht=26, width=2.5,
 	}
 }
 
+
 // template for 4 default bottle name tags
-translate([ 22, 22,0]) rotate(180) bottle_clip_name_tag(name="YourName");
-//translate([-22, 22,0]) rotate(270) bottle_clip_name_tag(name="J. Hacker");
-//translate([-22,-22,0]) rotate(  0) bottle_clip_name_tag(name="Acid Burn");
-//translate([ 22,-22,0]) rotate( 90) bottle_clip_name_tag(name="Zero Cool");
+translate([ 22, 22,0]) rotate(180) bottle_clip(name="YourName");
+//translate([-22, 22,0]) rotate(270) bottle_clip(name="J. Hacker");
+//translate([-22,-22,0]) rotate(  0) bottle_clip(name="Acid Burn");
+//translate([ 22,-22,0]) rotate( 90) bottle_clip(name="Zero Cool");
 
 // example for 0.33l bottles, different logo and different font
-//translate([ 22,-22,0]) rotate( 90) bottle_clip_name_tag(name="YourName",
+//translate([ 22,-22,0]) rotate( 90) bottle_clip(name="YourName",
 //	ru=13, rl=15, logo="yourlogo.dxf", font="Letters.dxf");
 
 // vim: set noet ts=2 sw=2 tw=80:
