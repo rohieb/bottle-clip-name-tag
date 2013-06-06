@@ -22,7 +22,22 @@ font="write/orbitron.dxf";
 $fn=50;   // approximation steps for the cylinders
 e=100;    // should be big enough, used for the outer boundary of the text/logo
 
-module name_tag () {
+/**
+ * Creates one instance of a bottle clip name tag.
+ * Parameters:
+ * ru: the radius on the upper side of the clip
+ * rl: the radius on the lower side of the clip
+ * ht: the height of the clip
+ * width: the thickness of the wall. Values near 2.5 usually result in a good
+ *	clippiness for PLA prints.
+ * logo: The path to a DXF file representing a logo that should be put above
+ *	the name. Logo files should be no larger than 50 units in height and should
+ *	be centered on the point (25,25). Also all units in the DXF file should be
+ *	in mm.
+ * font: the path to a font for Write.scad.
+ */
+module name_tag(ru=13, rl=17.5, ht=26, width=2.5,
+		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
 	difference() {
 		rotate([0,0,-45]) union() {
 			// main cylinder
@@ -63,3 +78,5 @@ translate([ 22, 22,0]) rotate(180) name_tag(name="YourName");
 // example for 0.33l bottles, different logo and different font
 //translate([ 22,-22,0]) rotate( 90) name_tag(name="YourName", ru=13, rl=15,
 //	logo="yourlogo.dxf", font="Letters.dxf");
+
+// vim: set noet ts=2 sw=2 :
