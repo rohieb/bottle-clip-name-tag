@@ -31,13 +31,15 @@ e=100;    // should be big enough, used for the outer boundary of the text/logo
  * ht: the height of the clip
  * width: the thickness of the wall. Values near 2.5 usually result in a good
  *	clippiness for PLA prints.
- * logo: The path to a DXF file representing a logo that should be put above
+ * name: the name that is printed on your name tag. For the default ru/rt/ht
+ *	values, this string should not exceed 18 characters to fit on the name tag.
+ * logo: the path to a DXF file representing a logo that should be put above
  *	the name. Logo files should be no larger than 50 units in height and should
  *	be centered on the point (25,25). Also all units in the DXF file should be
  *	in mm.
  * font: the path to a font for Write.scad.
  */
-module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5,
+module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
 		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
 	difference() {
 		rotate([0,0,-45]) union() {
