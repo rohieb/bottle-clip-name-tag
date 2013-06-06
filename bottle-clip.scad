@@ -1,30 +1,19 @@
+/**
+ * A name tag that can easily be clipped to the neck of your bottle.
+ * Copyright (C) 2013 Roland Hieber <rohieb+bottleclip@rohieb.name>
+ *
+ * See examples.scad for examples on how to use this module.
+ *
+ * The contents of this file are licenced under CC-BY-SA 3.0 Unported.
+ * See https://creativecommons.org/licenses/by-sa/3.0/deed for the
+ * licensing terms.
+ */
+
 include <write/Write.scad>
 
-// you don't need to change anything of the variables below, instead see the
-// examples at the end of this file.
-
-// defaults for 0.5l Club Mate bottles
-// inner radius, upper side (13 mm for 0.5l Club Mate or 0.33l bottles)
-ru=13;    // [1,30]
-// inner radius, lower side (17.5 mm for 0.5l Club Mate bottles, 15 mm for 0.33l
-// bottles)
-rl=17.5;  // [1,30]
-// total height. Keep at 26 mm for the default 0.5l/0.33l values above.
-ht=26;    // [1,30]
-// wall thickness. Keep close to 2.5 mm so you can easily clip it to the bottle.
-width=2.5; // [2,8]
-
-// default logo and font
-// logo DXF should be centered on 50mm*50mm to fit perfectly
-logo="thing-logos/stratum0-lowres.dxf";
-// font (see Write.scad description page for fonts)
-font="write/orbitron.dxf";
-
-$fn=50;   // approximation steps for the cylinders
-e=100;    // should be big enough, used for the outer boundary of the text/logo
-
 /**
- * Creates one instance of a bottle clip name tag.
+ * Creates one instance of a bottle clip name tag. The default values are
+ * suitable for 0.5l Club Mate bottles (and similar bottles).
  * Parameters:
  * ru: the radius on the upper side of the clip
  * rl: the radius on the lower side of the clip
@@ -41,6 +30,8 @@ e=100;    // should be big enough, used for the outer boundary of the text/logo
  */
 module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
 		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
+
+	e=100;  // should be big enough, used for the outer boundary of the text/logo
 	difference() {
 		rotate([0,0,-45]) union() {
 			// main cylinder
@@ -73,15 +64,15 @@ module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
 	}
 }
 
-
-// template for 4 default bottle name tags
-translate([ 22, 22,0]) rotate(180) bottle_clip(name="YourName");
-//translate([-22, 22,0]) rotate(270) bottle_clip(name="J. Hacker");
-//translate([-22,-22,0]) rotate(  0) bottle_clip(name="Acid Burn");
-//translate([ 22,-22,0]) rotate( 90) bottle_clip(name="Zero Cool");
-
-// example for 0.33l bottles, different logo and different font
-//translate([ 22,-22,0]) rotate( 90) bottle_clip(name="YourName",
-//	ru=13, rl=15, logo="yourlogo.dxf", font="Letters.dxf");
+/**
+ * Creates one instance of a bottle clip name tag suitable for 0.33l longneck
+ * bottles (like fritz cola, etc.). All parameters are passed to the module
+ * bottle_clip(), see there for their documentation.
+ */
+module bottle_clip_longneck(name="", width=2.5,
+		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
+	bottle_clip(name=name, ru=13, rl=15, ht=26, width=width, logo=logo,
+		font=font);
+}
 
 // vim: set noet ts=2 sw=2 tw=80:
