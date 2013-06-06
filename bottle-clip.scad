@@ -6,7 +6,8 @@ include <write/Write.scad>
 // defaults for 0.5l Club Mate bottles
 // inner radius, upper side (13 mm for 0.5l Club Mate or 0.33l bottles)
 ru=13;    // [1,30]
-// inner radius, lower side (17.5 mm for 0.5l Club Mate bottles, 15 mm for 0.33l bottles)
+// inner radius, lower side (17.5 mm for 0.5l Club Mate bottles, 15 mm for 0.33l
+// bottles)
 rl=17.5;  // [1,30]
 // total height. Keep at 26 mm for the default 0.5l/0.33l values above.
 ht=26;    // [1,30]
@@ -61,7 +62,8 @@ module bottle_clip_name_tag(ru=13, rl=17.5, ht=26, width=2.5,
 		difference () {
 			cylinder(r1=rl+e, r2=ru+e, h=ht);
 			translate([0,0,-1])
-				// Note: bottom edges of characters are hard to print when character depth is > 0.7
+				// Note: bottom edges of characters are hard to print when character
+				// depth is > 0.7
 				cylinder(r1=rl+width+0.7, r2=ru+width+0.7, h=ht+2);
 		}
 		// finally, substract a cube as a gap so we can clip it to the bottle
@@ -71,12 +73,12 @@ module bottle_clip_name_tag(ru=13, rl=17.5, ht=26, width=2.5,
 
 // template for 4 default bottle name tags
 translate([ 22, 22,0]) rotate(180) bottle_clip_name_tag(name="YourName");
-//translate([-22, 22,0]) rotate(270) bottle_clip_name_tag(name="J. Random Hacker");
+//translate([-22, 22,0]) rotate(270) bottle_clip_name_tag(name="J. Hacker");
 //translate([-22,-22,0]) rotate(  0) bottle_clip_name_tag(name="Acid Burn");
 //translate([ 22,-22,0]) rotate( 90) bottle_clip_name_tag(name="Zero Cool");
 
 // example for 0.33l bottles, different logo and different font
-//translate([ 22,-22,0]) rotate( 90) bottle_clip_name_tag(name="YourName", ru=13, rl=15,
-//	logo="yourlogo.dxf", font="Letters.dxf");
+//translate([ 22,-22,0]) rotate( 90) bottle_clip_name_tag(name="YourName",
+//	ru=13, rl=15, logo="yourlogo.dxf", font="Letters.dxf");
 
-// vim: set noet ts=2 sw=2 :
+// vim: set noet ts=2 sw=2 tw=80:
