@@ -6,9 +6,11 @@ bottles.
 
 The clip is customizable and you can tweak the following parameters:
 
- * radius on the upper and lower side, for easy adaptation to other bottle
-	 types. The script includes examples for standard 0.5l Club Mate bottles as
-	 well as german 0.33l bottles.
+ * name on the clip, font, and optional, logo.
+ * height and radius on the upper and lower side, for easy adaptation to other
+   bottle types. The script includes examples for standard 0.5l Club Mate (and
+   similar) bottles as well as 0.33l longneck bottles and German 0.33l DIN 6199
+   (“Steinie”) beer bottles.
  * wall thickness (though the default should be okay for easy clipping)
  
 
@@ -16,12 +18,21 @@ Instructions
 ------------
 
 First, get all prerequisites. If you cloned this repository with Git, all you
-have to do is change into the repository and do a `git submodule init && git
-submodule update`.
+have to do is `cd` into the repository and do a `git submodule init && git
+submodule update`. Otherwise, you need the following:
 
-Open `bottle-clip.scad` in OpenSCAD. At the end of the file, there is a
-template for 4 bottle name tags which you can adapt to build your own.
+ * [Write.scad][thing16193] and at least one font, put it into the `write/`
+   subfolder
+ * If you want a logo on your name tag, draw a DXF file by yourself, or choose
+   one out of my collection at rohieb/thing-logos. Your own logos should be no
+   more than 50mm in height, and centered on point (25,25) for optimal results.
 
+Then open `example.scad` in OpenSCAD, read it, choose an example that matches
+your expectations, comment it out (remove the `//` on the beginning of the
+line) and adapt it to your needs, or create your own. The code itself resides
+in `bottle-clip.scad` and should be documented sufficiently.
+
+[thing16193]: http://thingiverse.com/thing:16193
 
 Legacy and Licence
 ---------------
