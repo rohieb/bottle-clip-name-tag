@@ -27,4 +27,7 @@ bottle_clip(name="Zero Cool");
 // Now for something completely different: Longneck bottles.
 //bottle_clip_longneck(name="Tom Anderson", logo="thing-logos/glider.dxf");
 
+// ...or DIN 6199 ("Steinie") beer bottles. Note that these have no logo.
+//bottle_clip_steinie(name="ohbier");
+
 // vim: set noet ts=2 sw=2 tw=80:

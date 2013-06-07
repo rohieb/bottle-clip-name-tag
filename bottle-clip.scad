@@ -83,4 +83,15 @@ module bottle_clip_longneck(name="", width=2.5,
 		font=font);
 }
 
+/**
+ * Creates one instance of a bottle clip name tag suitable for 0.33l DIN 6199
+ * beer bottles (also known as "Steinie", "Stubbi", "Knolle", etc.). Because of
+ * reasons, there is no logo, but all other parameters are passed to the module
+ * bottle_clip(), see there for their documentation.
+ */
+module bottle_clip_steinie(name="", width=2.5, font="write/orbitron.dxf") {
+	bottle_clip(name=name, ru=13, rl=17.5, ht=13, width=width, logo="",
+		font=font);
+}
+
 // vim: set noet ts=2 sw=2 tw=80:
