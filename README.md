@@ -34,7 +34,7 @@ in `bottle-clip.scad` and should be documented sufficiently.
 
 [thing16193]: http://thingiverse.com/thing:16193
 
-Legacy and Licence
+Ancestry and Licence
 ---------------
 
 The [original design][thing888] was made by Thingiverse user
