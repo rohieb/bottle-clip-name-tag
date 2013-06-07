@@ -13,7 +13,9 @@ include <write/Write.scad>
 
 /**
  * Creates one instance of a bottle clip name tag. The default values are
- * suitable for 0.5l Club Mate bottles (and similar bottles).
+ * suitable for 0.5l Club Mate bottles (and similar bottles). By default, logo
+ * and text are placed on the name tag so they both share half the height. If
+ * there is no logo, the text uses the total height instead.
  * Parameters:
  * ru: the radius on the upper side of the clip
  * rl: the radius on the lower side of the clip
@@ -25,27 +27,33 @@ include <write/Write.scad>
  * logo: the path to a DXF file representing a logo that should be put above
  *	the name. Logo files should be no larger than 50 units in height and should
  *	be centered on the point (25,25). Also all units in the DXF file should be
- *	in mm.
+ *	in mm. This parameter can be empty; in this case, the text uses the total
+ *	height of the name tag.
  * font: the path to a font for Write.scad.
  */
 module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
 		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
 
 	e=100;  // should be big enough, used for the outer boundary of the text/logo
+
 	difference() {
 		rotate([0,0,-45]) union() {
 			// main cylinder
 			cylinder(r1=rl+width, r2=ru+width, h=ht);
-			// text
-			writecylinder(name, [0,0,0], rl+0.5, ht/13*7, h=ht/13*4, t=max(rl,ru),
-				font=font);
-			// logo
-			translate([0,0,ht*3/4-0.1])
-				rotate([90,0,0])
-				scale([ht/100,ht/100,1])
-				translate([-25,-25,0.5])
-				linear_extrude(height=max(ru,rl)*2)
-				import(logo);
+			// text and logo
+			if(logo == "") {
+				writecylinder(name, [0,0,3], rl+0.5, ht/13*7, h=ht/13*8, t=max(rl,ru),
+					font=font);
+			} else {
+				writecylinder(name, [0,0,0], rl+0.5, ht/13*7, h=ht/13*4, t=max(rl,ru),
+					font=font);
+				translate([0,0,ht*3/4-0.1])
+					rotate([90,0,0])
+					scale([ht/100,ht/100,1])
+					translate([-25,-25,0.5])
+					linear_extrude(height=max(ru,rl)*2)
+					import(logo);
+			}
 		}
 		// inner cylinder which is substracted
 		translate([0,0,-1])
