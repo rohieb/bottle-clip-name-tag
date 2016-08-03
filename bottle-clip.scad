@@ -94,4 +94,15 @@ module bottle_clip_steinie(name="", width=2.5, font="write/orbitron.dxf") {
 		font=font);
 }
 
+/*
+ * Create one instance of a bottle clip name tag suitable for 0.5l DIN 6198
+ * bottle (also known as "Euroflasche" or "Euroform 2"). All parameters are
+ * passed to the module bottle_clip(), see there for their documentation.
+ */
+module bottle_clip_euro2(name="", width=2.5,
+    logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
+  bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo,
+    font=font);
+}
+
 // vim: set noet ts=2 sw=2 tw=80:
