@@ -52,7 +52,8 @@ module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
 					scale([ht/100,ht/100,1])
 					translate([-25,-25,0.5])
 					linear_extrude(height=max(ru,rl)*2)
-					import(logo);
+					resize([45,0], auto=true)
+                    import(logo);
 			}
 		}
 		// inner cylinder which is substracted
