@@ -1,6 +1,7 @@
 /**
  * A name tag that can easily be clipped to the neck of your bottle.
  * Copyright (C) 2013 Roland Hieber <rohieb+bottleclip@rohieb.name>
+ * forked an extenden by fototeddy 2017
  *
  * See examples.scad for examples on how to use this module.
  *
@@ -9,7 +10,7 @@
  * licensing terms.
  */
 
-include <write/Write.scad>
+        include <text_on.scad>
 
 /**
  * Creates one instance of a bottle clip name tag. The default values are
@@ -29,31 +30,33 @@ include <write/Write.scad>
  *	be centered on the point (25,25). Also all units in the DXF file should be
  *	in mm. This parameter can be empty; in this case, the text uses the total
  *	height of the name tag.
- * font: the path to a font for Write.scad.
+ * font: the name of a system font or path to a seperate fontfile
+ * ew: eastwest orientation of the name to center it 
  */
 module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
-		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
+		logo="", ew=-90, resize=50, font="") {
 
 	e=100;  // should be big enough, used for the outer boundary of the text/logo
-
 	difference() {
 		rotate([0,0,-45]) union() {
 			// main cylinder
 			cylinder(r1=rl+width, r2=ru+width, h=ht);
 			// text and logo
 			if(logo == "") {
-				writecylinder(name, [0,0,3], rl+0.5, ht/13*7, h=ht/13*8, t=max(rl,ru),
-					font=font);
+				text_on_cylinder(name, [0,0,3], r1=rl+width, r2=ru+width, h=ht, eastwest=ew,size=9, updown=-10, font=font);
+                //writecylinder(name, [0,0,3], rl+0.5, ht/13*7, h=ht/13*8, t=max(rl,ru),
+					//font=font);
 			} else {
-				writecylinder(name, [0,0,0], rl+0.5, ht/13*7, h=ht/13*4, t=max(rl,ru),
-					font=font);
+                text_on_cylinder(name, [0,0,0], r1=rl+width, r2=ru+width, h=ht, eastwest=ew, size=9, updown=-10, font=font);
+				//writecylinder(name, [0,0,0], rl+0.5, ht/13*7, h=ht/13*4, t=max(rl,ru),
+					//font=font);
 				translate([0,0,ht*3/4-0.1])
 					rotate([90,0,0])
 					scale([ht/100,ht/100,1])
 					translate([-25,-25,0.5])
 					linear_extrude(height=max(ru,rl)*2)
-					resize([45,0], auto=true)
-                    import(logo);
+                    resize([resize,0,0], auto=[true,true,false])
+					import(logo);
 			}
 		}
 		// inner cylinder which is substracted
@@ -79,9 +82,8 @@ module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
  * bottle_clip(), see there for their documentation.
  */
 module bottle_clip_longneck(name="", width=2.5,
-		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
-	bottle_clip(name=name, ru=13, rl=15, ht=26, width=width, logo=logo,
-		font=font);
+		logo="", ew="", font="", resize=50) {
+	bottle_clip(name=name, ru=13, rl=15, ht=26, width=width, logo=logo, ew=ew, font=font, resize=resize);
 }
 
 /**
@@ -90,9 +92,8 @@ module bottle_clip_longneck(name="", width=2.5,
  * reasons, there is no logo, but all other parameters are passed to the module
  * bottle_clip(), see there for their documentation.
  */
-module bottle_clip_steinie(name="", width=2.5, font="write/orbitron.dxf") {
-	bottle_clip(name=name, ru=13, rl=17.5, ht=13, width=width, logo="",
-		font=font);
+module bottle_clip_steinie(name="", width=2.5) {
+	bottle_clip(name=name, ru=13, rl=17.5, ht=13, width=width, logo="");
 }
 
 /*
@@ -101,9 +102,8 @@ module bottle_clip_steinie(name="", width=2.5, font="write/orbitron.dxf") {
  * passed to the module bottle_clip(), see there for their documentation.
  */
 module bottle_clip_euro2(name="", width=2.5,
-    logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
-  bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo,
-    font=font);
+    logo="thing-logos/stratum0-lowres.dxf") {
+  bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo);
 }
 
 // vim: set noet ts=2 sw=2 tw=80:
