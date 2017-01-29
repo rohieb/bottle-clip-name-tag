@@ -44,12 +44,8 @@ module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
 			// text and logo
 			if(logo == "") {
 				text_on_cylinder(name, [0,0,3], r1=rl+width, r2=ru+width, h=ht, eastwest=ew,size=9, updown=-10, font=font);
-                //writecylinder(name, [0,0,3], rl+0.5, ht/13*7, h=ht/13*8, t=max(rl,ru),
-					//font=font);
 			} else {
                 text_on_cylinder(name, [0,0,0], r1=rl+width, r2=ru+width, h=ht, eastwest=ew, size=9, updown=-10, font=font);
-				//writecylinder(name, [0,0,0], rl+0.5, ht/13*7, h=ht/13*4, t=max(rl,ru),
-					//font=font);
 				translate([0,0,ht*3/4-0.1])
 					rotate([90,0,0])
 					scale([ht/100,ht/100,1])
@@ -102,7 +98,7 @@ module bottle_clip_steinie(name="", width=2.5) {
  * passed to the module bottle_clip(), see there for their documentation.
  */
 module bottle_clip_euro2(name="", width=2.5,
-    logo="thing-logos/stratum0-lowres.dxf") {
+    logo="") {
   bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo);
 }
 
