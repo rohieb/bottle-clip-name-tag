@@ -12,7 +12,7 @@ The clip is customizable and you can tweak the following parameters:
    similar) bottles as well as 0.33l longneck bottles and German 0.33l DIN 6199
    (“Steinie”) beer bottles.
  * wall thickness (though the default should be okay for easy clipping)
- 
+
 
 Instructions
 ------------
@@ -21,8 +21,6 @@ First, get all prerequisites. If you cloned this repository with Git, all you
 have to do is `cd` into the repository and do a `git submodule init && git
 submodule update`. Otherwise, you need the following:
 
- * [Write.scad][thing16193] and at least one font, put it into the `write/`
-   subfolder
  * If you want a logo on your name tag, draw a DXF file by yourself, or choose
    one out of my collection at rohieb/thing-logos. Your own logos should be no
    more than 50mm in height, and centered on point (25,25) for optimal results.
@@ -32,7 +30,6 @@ your expectations, comment it out (remove the `//` on the beginning of the
 line) and adapt it to your needs, or create your own. The code itself resides
 in `bottle-clip.scad` and should be documented sufficiently.
 
-[thing16193]: http://thingiverse.com/thing:16193
 
 Ancestry and Licence
 ---------------
@@ -42,6 +39,7 @@ The [original design][thing888] was made by Thingiverse user
 the [text][thing18978] and then the [logo][thing23817] on it, both his designs
 were [CC-BY-SA-3.0][ccbysa30]. In the direct consequence, the design in this
 repo is also [CC-BY-SA-3.0][ccbysa30].
+The the [text][textonscad] was replaced by fototeddy
 
 [thing888]: http://www.thingiverse.com/thing:888
 [wizard23]: http://www.thingiverse.com/wizard23
@@ -50,5 +48,4 @@ repo is also [CC-BY-SA-3.0][ccbysa30].
 [thing23817]: http://www.thingiverse.com/thing:23817
 [ccbync30]: https://creativecommons.org/licenses/by-nc/3.0/
 [ccbysa30]: https://creativecommons.org/licenses/by-sa/3.0/
-
-// vim: set et ts=2 sw=2 tw=0:
+[textonscad]: https://github.com/brodykenrick/text_on_OpenSCAD
