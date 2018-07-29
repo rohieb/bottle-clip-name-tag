@@ -24,6 +24,11 @@ include <write/Write.scad>
  *	clippiness for PLA prints.
  * name: the name that is printed on your name tag. For the default ru/rt/ht
  *	values, this string should not exceed 18 characters to fit on the name tag.
+ * gap: width of the opening gap, in degrees. For rigid materials this value
+ *  usually needs to be near 180 (but if you set it to >= 180, you won't have
+ *  anything left for holding the clip on the bottle). For flexible materials
+ *  like Ninjaflex, choose something near 0. For springy materials like PLA or
+ *  ABS, 90 has proven to be a good value.
  * logo: the path to a DXF file representing a logo that should be put above
  *	the name. Logo files should be no larger than 50 units in height and should
  *	be centered on the point (25,25). Also all units in the DXF file should be
@@ -31,7 +36,7 @@ include <write/Write.scad>
  *	height of the name tag.
  * font: the path to a font for Write.scad.
  */
-module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
+module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="", gap=90,
 		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
 
 	e=100;  // should be big enough, used for the outer boundary of the text/logo
@@ -67,8 +72,14 @@ module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
 				// depth is > 0.7
 				cylinder(r1=rl+width+0.7, r2=ru+width+0.7, h=ht+2);
 		}
-		// finally, substract a cube as a gap so we can clip it to the bottle
-		translate([0,0,-1]) cube([50,50,50]);
+
+		// finally, substract an equilateral triangle as a gap so we can clip it to
+		// the bottle
+		gap_x=50*sin(45-gap/2);
+		gap_y=50*cos(45-gap/2);
+		translate([0,0,-1])
+			linear_extrude(height=50)
+			polygon(points=[[0,0], [gap_x, gap_y], [50,50], [gap_y, gap_x]]);
 	}
 }
 
@@ -77,9 +88,9 @@ module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="",
  * bottles (like fritz cola, etc.). All parameters are passed to the module
  * bottle_clip(), see there for their documentation.
  */
-module bottle_clip_longneck(name="", width=2.5,
+module bottle_clip_longneck(name="", width=2.5, gap=90,
 		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
-	bottle_clip(name=name, ru=13, rl=15, ht=26, width=width, logo=logo,
+	bottle_clip(name=name, ru=13, rl=15, ht=26, width=width, logo=logo, gap=gap,
 		font=font);
 }
 
@@ -89,8 +100,8 @@ module bottle_clip_longneck(name="", width=2.5,
  * reasons, there is no logo, but all other parameters are passed to the module
  * bottle_clip(), see there for their documentation.
  */
-module bottle_clip_steinie(name="", width=2.5, font="write/orbitron.dxf") {
-	bottle_clip(name=name, ru=13, rl=17.5, ht=13, width=width, logo="",
+module bottle_clip_steinie(name="", width=2.5, gap=90, font="write/orbitron.dxf") {
+	bottle_clip(name=name, ru=13, rl=17.5, ht=13, width=width, logo="", gap=gap,
 		font=font);
 }
 
@@ -99,9 +110,9 @@ module bottle_clip_steinie(name="", width=2.5, font="write/orbitron.dxf") {
  * bottle (also known as "Euroflasche" or "Euroform 2"). All parameters are
  * passed to the module bottle_clip(), see there for their documentation.
  */
-module bottle_clip_euro2(name="", width=2.5,
+module bottle_clip_euro2(name="", width=2.5, gap=90,
     logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
-  bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo,
+  bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo, gap=gap,
     font=font);
 }
 

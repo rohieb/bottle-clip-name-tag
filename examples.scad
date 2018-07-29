@@ -24,6 +24,9 @@ bottle_clip(name="Zero Cool");
 //bottle_clip(name="Acid Burn", font="write/Letters.dxf");
 // ...or with a differnet logo and a different font... you get it.
 
+// ...or with a different gap angle of 45 instead of 90 degrees:
+//bottle_clip(name="Crash Override", gap=45);
+
 // Now for something completely different: Longneck bottles.
 //bottle_clip_longneck(name="Tom Anderson", logo="thing-logos/glider.dxf");
 
