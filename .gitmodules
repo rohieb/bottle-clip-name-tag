@@ -1,6 +1,6 @@
 [submodule "thing-logos"]
 	path = thing-logos
-	url = https://github.com/rohieb/thing-logos.git
+	url = git://github.com/rohieb/thing-logos.git
 [submodule "write"]
 	path = write
-	url = https://github.com/rohieb/Write.scad.git
+	url = git://github.com/rohieb/Write.scad.git
