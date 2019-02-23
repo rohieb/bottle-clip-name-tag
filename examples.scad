@@ -34,8 +34,8 @@ bottle_clip(name="Zero Cool");
 //bottle_clip_steinie(name="ohbier");
 
 // ...or just do your own variant: Measure the diameter of your bottle at two
-// different heights, and pass those as parameters rl (lower diameter), ru
-// (upper diameter) and ht (height) to the bottle_clip() module. You can also
+// different heights, and pass those as parameters rl (lower radius), ru
+// (upper radius) and ht (height) to the bottle_clip() module. You can also
 // use the other parameters from above, if you set logo="", then only the text
 // is rendered.
 //bottle_clip(name="Niobe", rl=15, ru=12, ht=16, logo="");
