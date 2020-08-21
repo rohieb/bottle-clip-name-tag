@@ -10,7 +10,15 @@
  * licensing terms.
  */
 
-use <bottle-clip.scad>
+/*
+ * Set the color to render and export.
+ * ALL will render all colors.
+ */
+//CURRENT_COLOR = "ALL";
+//CURRENT_COLOR = "black";
+//CURRENT_COLOR = "green";
+
+include <bottle-clip.scad>
 
 $fn=50;   // approximation steps for the cylinders
 
@@ -39,5 +47,8 @@ bottle_clip(name="Zero Cool");
 // use the other parameters from above, if you set logo="", then only the text
 // is rendered.
 //bottle_clip(name="Niobe", rl=15, ru=12, ht=16, logo="");
+
+// With color:
+//bottle_clip(name="Zero Cool", bg_color="black", text_color="green", logo_color="green");
 
 // vim: set noet ts=2 sw=2 tw=80:

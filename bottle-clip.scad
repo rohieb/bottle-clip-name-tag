@@ -12,6 +12,25 @@
 include <write/Write.scad>
 
 /**
+ * Module for multi colored print.
+ * All children are the given color.
+ * Using the global CURRENT_COLOR it is possible to only render and export everything of one color.
+ * Doing this for all colors the resulting stls can be put together again to a multi filament print in the slicer.
+ * If CURRENT_COLOR is set to "ALL" all colors are displayed.
+ * If color is "DEFAULT", it is not colored in the preview.
+ * Inspired by https://erik.nygren.org/2018-3dprint-multicolor-openscad.html
+ */
+module multicolor(color) {
+    if (is_undef(CURRENT_COLOR) || CURRENT_COLOR == "ALL" || CURRENT_COLOR == color) {
+        if (color != "DEFAULT") {
+          color(color) children();
+        } else {
+            children();
+        }
+    }
+}
+
+/**
  * Creates one instance of a bottle clip name tag. The default values are
  * suitable for 0.5l Club Mate bottles (and similar bottles). By default, logo
  * and text are placed on the name tag so they both share half the height. If
@@ -35,24 +54,27 @@ include <write/Write.scad>
  *	in mm. This parameter can be empty; in this case, the text uses the total
  *	height of the name tag.
  * font: the path to a font for Write.scad.
+ * bg_color: The color of the background (the clip itself)
+ * text_color: The color of the text
+ * logo_color: The color of the logo
  */
 module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="", gap=90,
-		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
+		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf",
+        bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
 
 	e=100;  // should be big enough, used for the outer boundary of the text/logo
-
 	difference() {
 		rotate([0,0,-45]) union() {
 			// main cylinder
-			cylinder(r1=rl+width, r2=ru+width, h=ht);
+			multicolor(bg_color) cylinder(r1=rl+width, r2=ru+width, h=ht);
 			// text and logo
 			if(logo == "") {
-				writecylinder(name, [0,0,3], rl+0.5, ht/13*7, h=ht/13*8, t=max(rl,ru),
+				multicolor(text_color) writecylinder(name, [0,0,3], rl+0.5, ht/13*7, h=ht/13*8, t=max(rl,ru),
 					font=font);
 			} else {
-				writecylinder(name, [0,0,0], rl+0.5, ht/13*7, h=ht/13*4, t=max(rl,ru),
+				multicolor(text_color) writecylinder(name, [0,0,0], rl+0.5, ht/13*7, h=ht/13*4, t=max(rl,ru),
 					font=font);
-				translate([0,0,ht*3/4-0.1])
+				multicolor(logo_color) translate([0,0,ht*3/4-0.1])
 					rotate([90,0,0])
 					scale([ht/100,ht/100,1])
 					translate([-25,-25,0.5])
@@ -89,9 +111,10 @@ module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="", gap=90,
  * bottle_clip(), see there for their documentation.
  */
 module bottle_clip_longneck(name="", width=2.5, gap=90,
-		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
+		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf",
+        bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
 	bottle_clip(name=name, ru=13, rl=15, ht=26, width=width, logo=logo, gap=gap,
-		font=font);
+		font=font, bg_color=bg_color, text_color=text_color, logo_color=logo_color);
 }
 
 /**
@@ -100,9 +123,10 @@ module bottle_clip_longneck(name="", width=2.5, gap=90,
  * reasons, there is no logo, but all other parameters are passed to the module
  * bottle_clip(), see there for their documentation.
  */
-module bottle_clip_steinie(name="", width=2.5, gap=90, font="write/orbitron.dxf") {
+module bottle_clip_steinie(name="", width=2.5, gap=90, font="write/orbitron.dxf",
+        bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
 	bottle_clip(name=name, ru=13, rl=17.5, ht=13, width=width, logo="", gap=gap,
-		font=font);
+		font=font, bg_color=bg_color, text_color=text_color, logo_color=logo_color);
 }
 
 /*
@@ -111,9 +135,10 @@ module bottle_clip_steinie(name="", width=2.5, gap=90, font="write/orbitron.dxf"
  * passed to the module bottle_clip(), see there for their documentation.
  */
 module bottle_clip_euro2(name="", width=2.5, gap=90,
-    logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf") {
+    logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf",
+    bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
   bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo, gap=gap,
-    font=font);
+    font=font, bg_color=bg_color, text_color=text_color, logo_color=logo_color);
 }
 
 // vim: set noet ts=2 sw=2 tw=80:
