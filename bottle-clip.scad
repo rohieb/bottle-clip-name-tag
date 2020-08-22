@@ -21,13 +21,13 @@ include <write/Write.scad>
  * Inspired by https://erik.nygren.org/2018-3dprint-multicolor-openscad.html
  */
 module multicolor(color) {
-    if (is_undef(CURRENT_COLOR) || CURRENT_COLOR == "ALL" || CURRENT_COLOR == color) {
-        if (color != "DEFAULT") {
-          color(color) children();
-        } else {
-            children();
-        }
-    }
+	if (is_undef(CURRENT_COLOR) || CURRENT_COLOR == "ALL" || CURRENT_COLOR == color) {
+		if (color != "DEFAULT") {
+			color(color) children();
+		} else {
+			children();
+		}
+	}
 }
 
 /**
@@ -40,19 +40,19 @@ module multicolor(color) {
  * rl: the radius on the lower side of the clip
  * ht: the height of the clip
  * width: the thickness of the wall. Values near 2.5 usually result in a good
- *	clippiness for PLA prints.
+ *  clippiness for PLA prints.
  * name: the name that is printed on your name tag. For the default ru/rt/ht
- *	values, this string should not exceed 18 characters to fit on the name tag.
+ *  values, this string should not exceed 18 characters to fit on the name tag.
  * gap: width of the opening gap, in degrees. For rigid materials this value
- *  usually needs to be near 180 (but if you set it to >= 180, you won't have
- *  anything left for holding the clip on the bottle). For flexible materials
- *  like Ninjaflex, choose something near 0. For springy materials like PLA or
- *  ABS, 90 has proven to be a good value.
+ *   usually needs to be near 180 (but if you set it to >= 180, you won't have
+ *   anything left for holding the clip on the bottle). For flexible materials
+ *   like Ninjaflex, choose something near 0. For springy materials like PLA or
+ *   ABS, 90 has proven to be a good value.
  * logo: the path to a DXF file representing a logo that should be put above
- *	the name. Logo files should be no larger than 50 units in height and should
- *	be centered on the point (25,25). Also all units in the DXF file should be
- *	in mm. This parameter can be empty; in this case, the text uses the total
- *	height of the name tag.
+ *   the name. Logo files should be no larger than 50 units in height and should
+ *   be centered on the point (25,25). Also all units in the DXF file should be
+ *   in mm. This parameter can be empty; in this case, the text uses the total
+ *   height of the name tag.
  * font: the path to a font for Write.scad.
  * bg_color: The color of the background (the clip itself)
  * text_color: The color of the text
@@ -60,7 +60,7 @@ module multicolor(color) {
  */
 module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="", gap=90,
 		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf",
-        bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
+		bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
 
 	e=100;  // should be big enough, used for the outer boundary of the text/logo
 	difference() {
@@ -112,7 +112,7 @@ module bottle_clip(ru=13, rl=17.5, ht=26, width=2.5, name="", gap=90,
  */
 module bottle_clip_longneck(name="", width=2.5, gap=90,
 		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf",
-        bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
+		bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
 	bottle_clip(name=name, ru=13, rl=15, ht=26, width=width, logo=logo, gap=gap,
 		font=font, bg_color=bg_color, text_color=text_color, logo_color=logo_color);
 }
@@ -124,7 +124,7 @@ module bottle_clip_longneck(name="", width=2.5, gap=90,
  * bottle_clip(), see there for their documentation.
  */
 module bottle_clip_steinie(name="", width=2.5, gap=90, font="write/orbitron.dxf",
-        bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
+		bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
 	bottle_clip(name=name, ru=13, rl=17.5, ht=13, width=width, logo="", gap=gap,
 		font=font, bg_color=bg_color, text_color=text_color, logo_color=logo_color);
 }
@@ -135,10 +135,10 @@ module bottle_clip_steinie(name="", width=2.5, gap=90, font="write/orbitron.dxf"
  * passed to the module bottle_clip(), see there for their documentation.
  */
 module bottle_clip_euro2(name="", width=2.5, gap=90,
-    logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf",
-    bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
-  bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo, gap=gap,
-    font=font, bg_color=bg_color, text_color=text_color, logo_color=logo_color);
+		logo="thing-logos/stratum0-lowres.dxf", font="write/orbitron.dxf",
+		bg_color="DEFAULT", text_color="DEFAULT", logo_color="DEFAULT") {
+	bottle_clip(name=name, ru=13, rl=22.5, ht=26, width=width, logo=logo, gap=gap,
+		font=font, bg_color=bg_color, text_color=text_color, logo_color=logo_color);
 }
 
 // vim: set noet ts=2 sw=2 tw=80:
