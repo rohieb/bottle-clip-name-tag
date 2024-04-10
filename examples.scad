@@ -41,6 +41,18 @@ bottle_clip(name="Zero Cool");
 // ...or DIN 6199 ("Steinie") beer bottles. Note that these have no logo.
 //bottle_clip_steinie(name="ohbier");
 
+// without logo, half the height. this is useable with both
+// NRW-bottles and Euro-bottles (shorter 0.5l bottles,
+// especially beer bottles in bavaria)
+//bottle_clip(name="ohbier", logo="", rl=31/2, ru=27/2, ht=13.1);
+
+// without logo, half the height, for weissbier glasses
+//bottle_clip(name="ohbier", logo="", rl=48/2, ru=48/2, ht=13.1);
+
+// without logo, for glass "masskrug" handle.
+// oval shape: d1=21mm, d2=18mm
+//scale([18/21,1,1]) rotate(-45) bottle_clip(name="ohbier", logo="", rl=21/2, ru=21/2, ht=13.1);
+
 // ...or just do your own variant: Measure the diameter of your bottle at two
 // different heights, and pass those as parameters rl (lower radius), ru
 // (upper radius) and ht (height) to the bottle_clip() module. You can also
